@@ -1,0 +1,75 @@
+const questions = [
+    {
+        question: "Donde se encuentra el bocadillon",
+        answers:[
+            { text: "Puerto Lumbreras", correct: true},
+            { text: "Lorca", correct: false},
+            { text: "La Hoya", correct: false},
+            { text: "Pulpi", correct: false}
+        ]
+    },
+    {
+        question: "¿Juanmi es un cotilla?",
+        answers:[
+            { text: "Si", correct: true},
+            { text: "La primera", correct: false},
+            { text: "La cuarta", correct: false},
+            { text: "La segunda", correct: false}
+        ]
+    },
+    {
+        question: "Bocadillo de lomo, mahonesa, jamon y pimientos verdes",
+        answers:[
+            { text: "Serranito", correct: false},
+            { text: "Peugeot", correct: false},
+            { text: "Focus", correct: true},
+            { text: "Bocadillo de lomo, mahonesa, jamon y pimientos verdes", correct: false}
+        ]
+    },
+    {
+        question: "Nombre que reciben los residentes de Lorca",
+        answers:[
+            { text: "Lorquinos", correct: false},
+            { text: "Gente de Lorca", correct: false},
+            { text: "Cucalos", correct: true},
+            { text: "Shurmanicos", correct: false}
+        ]
+    }
+];
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz(){
+    currentQuestionIndex = 0;
+    score = 0;
+    nextButton.innerHTML = "Next";
+    showQuestion();
+}
+
+function showQuestion(){
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach( answer => {
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("btn");
+        answerButtons.appendChild(button);
+    });
+}
+
+function resetState(){
+    nextButton.style.display = "none";
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
+
+startQuiz();
